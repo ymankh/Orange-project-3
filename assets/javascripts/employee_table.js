@@ -4,15 +4,16 @@ let filter;
 let sortOption;
 let data;
 let table_heading = [
-  ["id", "Employee ID"],
-  ["name", "Full Name"],
-  ["department", "Department"],
-  ["job title", "Job Title"],
+  ["ID", "Employee ID"],
+  ["Name", "Full Name"],
+  ["Department", "Department"],
+  ["Job Title", "Job Title"],
   ["Hire Date", "Hire Date"],
 ];
 // make the heading for the table
-{
+function createHeadings() {
   let tr = document.createElement("tr");
+  table_head.innerHTML = "";
   tr.appendChild(createTh("#"));
   table_heading
     .map((heading) => createTh(heading, true))
@@ -21,6 +22,7 @@ let table_heading = [
     });
   table_head.appendChild(tr);
 }
+createHeadings();
 
 async function getData() {
   if (!data) {
@@ -79,9 +81,52 @@ function createTh(value, sortable) {
   return th;
 }
 let filterInput = document.getElementById("filter");
-filterInput.addEventListener("input", (e) => {
-  console.log(e);
-  filter = filterInput.value.toLowerCase();
-  populateEmployeeData();
-});
+try {
+  filterInput.addEventListener("input", (e) => {
+    console.log(e);
+    filter = filterInput.value.toLowerCase();
+    populateEmployeeData();
+  });
+} catch (error) {
+  console.warn("Couldn't find the filter for the table.");
+}
+
+try {
+  let tableColumnsSelector = document.getElementById("employee-table-columns");
+  for (const key in data[0]) {
+    const li = document.createElement("li");
+    li.className = "dropdown-item";
+
+    const input = document.createElement("input");
+    input.className = "form-check-input";
+    input.type = "checkbox";
+    input.value = key;
+    input.id = key.replace(" ", "_");
+
+    const label = document.createElement("label");
+    label.className = "form-check-label ms-1";
+    label.htmlFor = key.replace(" ", "_");
+
+    input.addEventListener("change", (event) => {
+      if (input.checked) {
+        table_heading.push([label.innerText, input.value]);
+      } else {
+        table_heading = table_heading.filter((val) => val[1] !== input.value);
+      }
+      createHeadings();
+      populateEmployeeData();
+    });
+
+    li.appendChild(input);
+    li.appendChild(label);
+    const colName = table_heading.find((val) => val[1] === key);
+    if (colName) {
+      input.checked = true;
+      label.innerText = colName[0];
+    } else {
+      label.innerText = key;
+    }
+    tableColumnsSelector.appendChild(li);
+  }
+} catch (error) {}
 populateEmployeeData();

@@ -249,7 +249,7 @@ th:hover {
   justify-content: space-between;
 }
 
-.table-taps input {
+.table-taps > input {
   width: 150px;
 }
 
