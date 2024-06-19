@@ -24,7 +24,7 @@ function createCard() {
     pEmail.className = "email";
 
     // Set image source based on gender
-    imgCard.src = entry.Gender == "Male" ? "male.jpg" : "female.jpg";
+    imgCard.src = entry.Gender == "Male" ? "assets/images/male.jpg" : "assets/images/female.jpg";
 
     // Assign alt text to the image
     imgCard.alt = "Profile Image";
