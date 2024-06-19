@@ -3,6 +3,8 @@ let table_head = document.querySelector("#employee-table thead");
 let filter;
 let sortOption;
 let data;
+
+// Default table heading
 let table_heading = [
   ["ID", "Employee ID"],
   ["Name", "Full Name"],
@@ -10,7 +12,8 @@ let table_heading = [
   ["Job Title", "Job Title"],
   ["Hire Date", "Hire Date"],
 ];
-// make the heading for the table
+
+// Make the heading for the table
 function createHeadings() {
   let tr = document.createElement("tr");
   table_head.innerHTML = "";
@@ -24,23 +27,30 @@ function createHeadings() {
 }
 createHeadings();
 
+// Get the data from the json file.
 async function getData() {
   if (!data) {
     let response = await fetch("assets/data/employees_data.json");
     data = await response.json();
   }
 }
-
 await getData();
+
+// Fill the table with the employees data.
 
 function populateEmployeeData() {
   let i = 1;
-  ("");
   let table_data = data;
+
+  // Filter the data filter word has been provided
   if (filter)
     table_data = data.filter((employee) =>
-      employee["Full Name"].toLowerCase().includes(filter)
+      table_heading
+        .map((heading) => employee[heading[1]])
+        .some((value) => String(value).toLocaleLowerCase().includes(filter))
     );
+
+  // Sort the rows in the table if a search option has been selected
   if (sortOption)
     table_data.sort((a, b) => {
       if (sortOption === "Hire Date")
@@ -48,7 +58,7 @@ function populateEmployeeData() {
       if (a[sortOption] < b[sortOption]) return -1;
       if (a[sortOption] > b[sortOption]) return 1;
     });
-
+  //  clean the table body before inserting the data
   table_body.innerHTML = "";
   table_data.forEach((element) => {
     let tr = document.createElement("tr");
@@ -62,12 +72,14 @@ function populateEmployeeData() {
   });
 }
 
+// Create table data cell
 function createTd(value) {
   let td = document.createElement("td");
   td.innerText = value;
   return td;
 }
 
+// create table heading element
 function createTh(value, sortable) {
   let th = document.createElement("th");
   th.innerText = value[0];
@@ -80,6 +92,8 @@ function createTh(value, sortable) {
     });
   return th;
 }
+
+// Add event to each created head if it is sortable to sort table rows
 let filterInput = document.getElementById("filter");
 try {
   filterInput.addEventListener("input", (e) => {
@@ -128,5 +142,10 @@ try {
     }
     tableColumnsSelector.appendChild(li);
   }
-} catch (error) {}
+} catch (error) {
+  console.warn(
+    "You should add the heading option component in order to add or remove table columns"
+  );
+}
+// Add data to the table in the start of the code
 populateEmployeeData();
