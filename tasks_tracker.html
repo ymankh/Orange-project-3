@@ -207,20 +207,16 @@
                     <label class="MainLabel" for="AssignMembersSelect"
                       >Assign To Members</label
                     >
-                    <select name="members" id="AssignMembersSelect">
-                      <option disabled selected>+ Add person</option>
-                      <option value="Ahmad">Ahmad</option>
-                      <option value="Ahmad">Ali</option>
-                    </select>
-                  </div>
-
-                  <div class="formDiv" id="SupervisorDiv">
-                    <label class="MainLabel" for="SupervisorSelect"
-                      >Supervisor</label
-                    >
-                    <select name="supervisor" id="SupervisorSelect">
-                      <option disabled selected value="">+ Add person</option>
-                    </select>
+                    <div id="membersContainer">
+                      <select
+                        name="members"
+                        id="AssignMembersSelect"
+                        class="select-dropdown"
+                        onchange="addMemberDropdown(this)"
+                      >
+                        <option disabled selected>+ Add person</option>
+                      </select>
+                    </div>
                   </div>
                 </form>
               </div>
@@ -232,7 +228,11 @@
                 >
                   Close
                 </button>
-                <button type="button" class="btn btn-primary">
+                <button
+                  type="button"
+                  data-bs-dismiss="modal"
+                  class="btn btn-primary"
+                >
                   Save changes
                 </button>
               </div>
@@ -427,6 +427,6 @@
     </div>
 
     <script src="assets/javascripts/bootstrap.js"></script>
-    <script type="module" src="assets/javascripts/create_new_task.js"></script>
+    <script src="assets/javascripts/create_new_task.js"></script>
   </body>
 </html>

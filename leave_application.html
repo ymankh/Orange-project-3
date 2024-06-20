@@ -5,11 +5,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="assets/css/bootstrap.css" />
     <link rel="stylesheet" href="assets/css/icons.css" />
-    <link rel="stylesheet" href="assets/css/style.css" />
     <link
       rel="stylesheet"
       href="assets/bootstrap-icons/font/bootstrap-icons.css"
     />
+    <link
+      href="https://cdn.jsdelivr.net/npm/choices.js/public/assets/styles/choices.min.css"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="assets/css/style.css" />
+
     <title>Dashboard</title>
   </head>
   <body class="dashboard">
@@ -49,6 +54,106 @@
       </ul>
     </aside>
     <div class="page">
+      <form>
+        <div
+          class="modal fade"
+          id="new-leave-form"
+          tabindex="-1"
+          aria-labelledby="new-leave-formLabel"
+          aria-hidden="true"
+        >
+          <div class="modal-dialog">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h1 class="modal-title fs-5" id="new-leave-formLabel">
+                  Create New Task
+                </h1>
+                <button
+                  type="button"
+                  class="btn-close"
+                  data-bs-dismiss="modal"
+                  aria-label="Close"
+                ></button>
+              </div>
+              <div class="modal-body">
+                <div class="mb-3">
+                  <label for="employee-name" class="form-label">Employee</label>
+                  <select class="form-select" id="employee-name" required>
+                    <option value="">Select Employee</option>
+                  </select>
+                </div>
+                <div class="mb-3">
+                  <label for="department" class="form-label">Department</label>
+                  <input
+                    type="text"
+                    class="form-control"
+                    id="department"
+                    disabled
+                  />
+                </div>
+                <div class="mb-3">
+                  <label for="jop-title" class="form-label">Jop Title</label>
+                  <input
+                    type="text"
+                    class="form-control"
+                    id="jop-title"
+                    disabled
+                  />
+                </div>
+                <div class="mb-3">
+                  <label for="leaveType" class="form-label">Leave Type</label>
+                  <select class="form-select" id="leaveType" required>
+                    <option value="">Select Leave Type</option>
+                    <option value="Sick Leave">Sick Leave</option>
+                    <option value="Annual Leave">Annual Leave</option>
+                    <option value="Maternity Leave">Maternity Leave</option>
+                    <option value="Casual Leave">Casual Leave</option>
+                  </select>
+                </div>
+                <div class="mb-3">
+                  <label for="startDate" class="form-label">Start Date</label>
+                  <input
+                    type="date"
+                    class="form-control"
+                    id="startDate"
+                    required
+                  />
+                </div>
+                <div class="mb-3">
+                  <label for="endDate" class="form-label">End Date</label>
+                  <input
+                    type="date"
+                    class="form-control"
+                    id="endDate"
+                    required
+                  />
+                </div>
+                <div class="mb-3">
+                  <label for="reason" class="form-label">Reason</label>
+                  <textarea
+                    class="form-control"
+                    id="reason"
+                    rows="3"
+                    required
+                  ></textarea>
+                </div>
+              </div>
+              <div class="modal-footer">
+                <button
+                  type="button"
+                  class="btn btn-secondary"
+                  data-bs-dismiss="modal"
+                >
+                  Close
+                </button>
+                <button type="submit" class="btn btn-primary">
+                  Save
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </form>
       <nav class="navbar navbar-expand-lg bg-body-tertiary">
         <div class="container-fluid">
           <a class="navbar-brand" href="#">Navbar</a>
@@ -108,9 +213,13 @@
         </div>
       </nav>
       <div class="header">
-        <h1>Employees</h1>
-        <button class="btn btn-primary">
-          <i class="bi bi-plus-square me-2"></i> Add Leave
+        <h1>Leaves Applications</h1>
+        <button
+          data-bs-toggle="modal"
+          data-bs-target="#new-leave-form"
+          class="btn btn-primary"
+        >
+          <i class="bi bi-plus-square me-2"></i> Add a Leave
         </button>
       </div>
 
@@ -150,5 +259,7 @@
     <script type="module" src="assets/javascripts/employee_table.js"></script>
     <script src="assets/javascripts/popper.min.js"></script>
     <script src="assets/javascripts/bootstrap.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/choices.js/public/assets/scripts/choices.min.js"></script>
+    <script src="assets/javascripts/leave_aplications.js"></script>
   </body>
 </html>
