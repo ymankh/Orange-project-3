@@ -4,6 +4,7 @@ const jopTitle = document.getElementById("jop-title");
 const department = document.getElementById("department");
 const startDate = document.getElementById("startDate");
 startDate.value = new Date().toISOString().split("T")[0];
+
 let employeeData;
 async function addEmployeeNamesOptions() {
   if (!employeeData) {
