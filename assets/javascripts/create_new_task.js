@@ -160,11 +160,15 @@ function addTaskToPage(task) {
   const tasksGroup = document.querySelector(`.tasks-group.${task.status}`);
   const taskContainer = tasksGroup.querySelector(".tasks-container");
   const taskGroupHeder = tasksGroup.querySelector(".tasks-group-header span");
-  const taskCounter = taskGroupHeder.textContent.replace(/[^\d]/g, "");
-  taskGroupHeder.textContent = `(${+taskCounter + 1})`;
   const taskCard = createTaskCard(task);
   taskContainer.appendChild(taskCard);
+
+  // For the tasks counter in each group.
+  const taskCounter = taskGroupHeder.textContent.replace(/[^\d]/g, "");
+  taskGroupHeder.textContent = `(${+taskCounter + 1})`;
 }
+
+// Load all tasks on page load
 tasks.forEach((task) => {
   addTaskToPage(task);
 });
