@@ -5,6 +5,16 @@ const selectedEmployeesSpan = document.getElementById("selected-employees");
 const modal = document.getElementById("new-task-form");
 let tasks = (localStorage.tasks && JSON.parse(localStorage.tasks)) || [];
 let selectedEmployees = [];
+const formFields = {
+  taskTitle: document.getElementById("TaskTitle"),
+  status: document.getElementById("Status"),
+  startDate: document.getElementById("StartDate"),
+  dueDate: document.getElementById("DueDate"),
+  description: document.getElementById("Description"),
+};
+
+// Set default starting date to be today
+formFields.startDate.value = new Date().toISOString().split("T")[0];
 
 selectEmployee.addEventListener("change", (event) => {
   // Add the employee to the task
@@ -20,16 +30,27 @@ selectEmployee.addEventListener("change", (event) => {
   icon.className = "bi bi-x";
   span.appendChild(icon);
   selectedEmployeesSpan.appendChild(span);
-  // Delete the span on click and remove employee from the list
+
+  // Add delete the span on click event and remove employee from the list
   span.addEventListener("click", (event) => {
     selectedEmployees = selectedEmployees.filter((val) => val !== employeeName);
     span.remove();
     if (selectedEmployees.length === 0) {
       selectEmployee.required = true;
     }
+
+    // Unhide the employee option
+    const option = document.querySelector(`option[value="${employeeName}"]`);
+    console.log(option);
+    option.style.display = "";
   });
+
   selectEmployee.required = false;
   selectEmployee.value = "";
+
+  // Hide the selected option after choosing it.
+  const option = document.querySelector(`option[value="${employeeName}"]`);
+  option.style.display = "none";
 });
 
 // Get the employee data from the Json file
@@ -44,9 +65,6 @@ async function getData() {
     option.textContent = employee["Full Name"];
     // Remove the option after selecting
     selectEmployee.appendChild(option);
-    selectEmployee.addEventListener("change", (event) => {
-      if (selectEmployee.value === option.value) console.log("test");;
-    });
   }
 
   jsonData.forEach((employee) => {
@@ -59,23 +77,26 @@ getData();
 function addTaskToLocalStorage(task) {
   tasks.push(task);
   localStorage.tasks = JSON.stringify(tasks);
+
+  // Display the new task on the page.
+  addTaskToPage(task);
 }
 
 form.addEventListener("submit", (event) => {
   event.preventDefault();
   // Get the data from the form
   let taskData = {
-    taskTitle: document.getElementById("TaskTitle").value,
-    status: document.getElementById("Status").value,
-    priority: document.querySelector('input[name="Priority"]:checked').value,
-    startDate: document.getElementById("StartDate").value,
-    dueDate: document.getElementById("DueDate").value,
-    description: document.getElementById("Description").value,
     assignMembersSelect: selectedEmployees,
+    priority: document.querySelector('input[name="Priority"]:checked').value,
   };
+  Object.keys(formFields).forEach((key) => {
+    taskData[key] = formFields[key].value;
+  });
   addTaskToLocalStorage(taskData);
   // Clear form data
   form.reset();
+  // Set default starting date to be today again
+  formFields.startDate.value = new Date().toISOString().split("T")[0];
 
   // Reset selected employee list
   selectedEmployeesSpan.innerHTML = "";
@@ -133,3 +154,17 @@ function createTaskCard(task) {
   return taskDiv;
 }
 
+// Add the tasks to the page
+
+function addTaskToPage(task) {
+  const tasksGroup = document.querySelector(`.tasks-group.${task.status}`);
+  const taskContainer = tasksGroup.querySelector(".tasks-container");
+  const taskGroupHeder = tasksGroup.querySelector(".tasks-group-header span");
+  const taskCounter = taskGroupHeder.textContent.replace(/[^\d]/g, "");
+  taskGroupHeder.textContent = `(${+taskCounter + 1})`;
+  const taskCard = createTaskCard(task);
+  taskContainer.appendChild(taskCard);
+}
+tasks.forEach((task) => {
+  addTaskToPage(task);
+});

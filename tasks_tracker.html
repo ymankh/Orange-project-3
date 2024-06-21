@@ -145,10 +145,11 @@
                   <div class="formDiv" id="StatusDiv">
                     <label class="MainLabel" for="Status">Status</label>
                     <select name="Status" id="Status" required>
-                      <option value="to-do">To-do</option>
+                      <option value="to-do">To do</option>
                       <option value="in-progress">In Progress</option>
                       <option value="completed">Completed</option>
-                      <option value="cancelled">Cancelled</option>
+                      <option value="on-hold">On Hold</option>
+                      <option value="canceled">Canceled</option>
                     </select>
                   </div>
 
@@ -265,163 +266,40 @@
             </button>
           </div>
           <div class="tasks">
-            <div class="tasks-group backlog">
+            <div class="tasks-group to-do">
               <div class="tasks-group-header">
                 <h5>To do</h5>
-                <span>(2)</span>
+                <span>(0)</span>
               </div>
-              <div class="tasks-container">
-                <div class="task">
-                  <div class="badge text-bg-primary">low</div>
-                  <h6 class="task-title">Task title</h6>
-                  <div class="task contant">Do some things</div>
-                  <div class="due-date">
-                    <span class="text-muted"
-                      ><i class="bi bi-calendar-event"></i
-                      ><span class="badge text-bg-secondary mx-2">
-                        Due date Abr, 28</span
-                      >
-                    </span>
-                  </div>
-                </div>
-               
-                <div class="task">
-                  <div class="badge text-bg-primary">low</div>
-                  <h6 class="task-title">Task title</h6>
-                  <div class="task contant">Do some things</div>
-                  <div class="due-date">
-                    <span class="text-muted"
-                      ><i class="bi bi-calendar-event"></i
-                      ><span class="badge text-bg-secondary mx-2">
-                        Due date Abr, 28</span
-                      >
-                    </span>
-                  </div>
-                </div>
-              </div>
+              <div class="tasks-container"></div>
             </div>
-            <div class="tasks-group doing">
+            <div class="tasks-group in-progress">
               <div class="tasks-group-header">
                 <h5>In progress</h5>
-                <span>(2)</span>
+                <span>(0)</span>
               </div>
-              <div class="tasks-container">
-                <div class="task">
-                  <div class="badge text-bg-danger">high</div>
-                  <h6 class="task-title">Task title</h6>
-                  <div class="task contant">Do some things</div>
-                  <div class="due-date">
-                    <span class="text-muted"
-                      ><i class="bi bi-calendar-event"></i
-                      ><span class="badge text-bg-secondary mx-2">
-                        Due date Abr, 28</span
-                      >
-                    </span>
-                  </div>
-                </div>
-                <div class="task">
-                  <div class="badge text-bg-primary">low</div>
-                  <h6 class="task-title">Task title</h6>
-                  <div class="task contant">Do some things</div>
-                  <div class="due-date">
-                    <span class="text-muted"
-                      ><i class="bi bi-calendar-event"></i
-                      ><span class="badge text-bg-secondary mx-2">
-                        Due date Abr, 28</span
-                      >
-                    </span>
-                  </div>
-                </div>
-              </div>
+              <div class="tasks-container"></div>
             </div>
             <div class="tasks-group on-hold">
               <div class="tasks-group-header">
                 <h5>On hold</h5>
-                <span>(2)</span>
+                <span>(0)</span>
               </div>
-              <div class="tasks-container">
-                <div class="task">
-                  <div class="badge text-bg-primary">low</div>
-                  <h6 class="task-title">Task title</h6>
-                  <div class="task contant">Do some things</div>
-                  <div class="due-date">
-                    <span class="text-muted"
-                      ><i class="bi bi-calendar-event"></i
-                      ><span class="badge text-bg-secondary mx-2">
-                        Due date Abr, 28</span
-                      >
-                    </span>
-                  </div>
-                </div>
-              </div>
+              <div class="tasks-container"></div>
             </div>
-            <div class="tasks-group done">
+            <div class="tasks-group completed">
               <div class="tasks-group-header">
                 <h5>Completed</h5>
-                <span>(2)</span>
+                <span>(0)</span>
               </div>
-              <div class="tasks-container">
-                <div class="task">
-                  <div class="badge text-bg-primary">low</div>
-                  <h6 class="task-title">Task title</h6>
-                  <div class="task contant">Do some things</div>
-                  <div class="due-date">
-                    <span class="text-muted"
-                      ><i class="bi bi-calendar-event"></i
-                      ><span class="badge text-bg-secondary mx-2">
-                        Due date Abr, 28</span
-                      >
-                    </span>
-                  </div>
-                </div>
-                <div class="task">
-                  <div class="badge text-bg-primary">low</div>
-                  <h6 class="task-title">Task title</h6>
-                  <div class="task contant">Do some things</div>
-                  <div class="due-date">
-                    <span class="text-muted"
-                      ><i class="bi bi-calendar-event"></i
-                      ><span class="badge text-bg-secondary mx-2">
-                        Due date Abr, 28</span
-                      >
-                    </span>
-                  </div>
-                </div>
-                <div class="task">
-                  <div class="badge text-bg-primary">low</div>
-                  <h6 class="task-title">Task title</h6>
-                  <div class="task contant">Do some things</div>
-                  <div class="due-date">
-                    <span class="text-muted"
-                      ><i class="bi bi-calendar-event"></i
-                      ><span class="badge text-bg-secondary mx-2">
-                        Due date Abr, 28</span
-                      >
-                    </span>
-                  </div>
-                </div>
-              </div>
+              <div class="tasks-container"></div>
             </div>
-            <div class="tasks-group archive">
+            <div class="tasks-group canceled">
               <div class="tasks-group-header">
-                <h5>Cancelled</h5>
-                <span>(2)</span>
+                <h5>Canceled</h5>
+                <span>(0)</span>
               </div>
-              <div class="tasks-container">
-                <div class="task">
-                  <div class="badge text-bg-primary">low</div>
-                  <h6 class="task-title">Task title</h6>
-                  <div class="task contant">Do some things</div>
-                  <div class="due-date">
-                    <span class="text-muted"
-                      ><i class="bi bi-calendar-event"></i
-                      ><span class="badge text-bg-secondary mx-2">
-                        Due date Abr, 28</span
-                      >
-                    </span>
-                  </div>
-                </div>
-              </div>
+              <div class="tasks-container"></div>
             </div>
           </div>
         </main>
